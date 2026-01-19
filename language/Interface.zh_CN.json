@@ -1,0 +1,59 @@
+{
+	"windowTitle": "Spine快捷键编辑工具",
+	"status_linked": "[已链接]",
+	"status_unlinked": "[未链接]",
+
+	"groupHotkeyList": "快捷键列表",
+
+	"labelCategory": "类别：",
+	"labelLanguage": "语言：",
+	"statusLabel": "  请选择想设置快捷方式的操作",
+	"statusConflict": "存在冲突：",
+
+	"btnEditHotkey": "修改快捷键",
+	"btnAddHotkey": "添加快捷键",
+	"btnDeleteHotkey": "删除快捷键",
+	"btnQuoteMode": "单引号模式",
+	"btnLink_link": "链接",
+	"btnLink_relink": "重链接",
+	"btnOpenFolder": "打开文件夹",
+	"btnHelp": "使用说明",
+	"btnHotkeyDoc": "快捷键说明",
+	"btnKeyMapping": "快捷键字符对应",
+	"btnAbout": "程序信息",
+
+	"dialogTitle_link": "链接",
+	"dialogTitle_formatError": "格式化错误",
+	"dialogTitle_warning": "提示",
+	"dialogTitle_confirm": "确认操作",
+	"dialogTitle_confirmSave": "确认保存",
+	"dialogTitle_normalMode": "一般模式",
+	"dialogTitle_characterMode": "单引号模式",
+
+	"dialogContent_selectFile": "请链接正确的快捷键文件",
+	"dialogContent_duplicateHotkey": "此快捷键已录入",
+	"dialogContent_conflict": "与已设置的快捷键存在冲突。\n是否删除已有的设置？",
+	"dialogContent_saveChanges": "是否保存对快捷键的修改？",
+	"dialogContent_pressKey": "请从键盘按下要设置的快捷键",
+
+	"btn_ok": "确认",
+	"btn_cancel": "取消",
+	"btn_yes": "是",
+	"btn_no": "否",
+
+	"dialogTitle_userGuide": "使用说明",
+	"dialogTitle_shortcutsGuide": "快捷键说明",
+	"dialogTitle_keyMapping": "关键字字符对应",
+	"dialogTitle_about": "程序信息",
+
+	"userGuide": "● 链接Spine快捷键文件所在的文件路径\n● 点击输入框或编辑按钮录入快捷键\n● 点击确认后重启Spine或在编辑器设置中重新加载快捷键\n● 点击打开文件夹可以打开链接路径、对快捷键文件进行备份等操作\n● 核心处理规则外的高级快捷键录入请直接修改快捷键文件",
+
+	"shortcutsGuide": "● 一般模式可以使用\"ctrl\"、\"shift\"、\"alt\"修饰键组合快捷键\n● 单引号模式(字符模式)仅可以使用\"alt\"修饰键组合快捷键\n● 使用单引号模式、快捷键将附加长按功能。在触发动作一段延迟后重复触发\n● 单引号模式可以录入单个可键入字符('a'、'ア'、'啊'、'↓')。部分字符有对应关键字\n● 单引号模式键盘外特殊字符的键入需要做键映射、请不要做超预期的录入",
+
+	"keyMapping": "标准美式键盘主键盘区域\n'0~9'\t:\t0~9、NUM_(0~9)\n'`'\t:\tGRAVE\n'@'\t:\tAT\n'#'\t:\tPOUND\n'-'\t:\tMINUS\n'+'\t:\tPLUS\n'='\t:\tEQUALS\n'['\t:\tLEFT_BRACKET\n']'\t:\tRIGHT_BRACKET\n'\\'\t:\tBACKSLASH\n';'\t:\tSEMICOLON\n'''\t:\tAPOSTROPHE\n':'\t:\tCOLON\n','\t:\tCOMMA\n'.'\t:\tPERIOD\n'/'\t:\tSLASH\n' '\t:\tSPACE\n'*'\t:\tSTAR",
+
+	"about_designer": "设计",
+	"about_version": "版本",
+	"about_buildDate": "构建",
+	"about_compatible": "适配"
+}

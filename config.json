@@ -1,0 +1,29 @@
+{
+	"metadata": {
+		"version": "v0.1",
+		"build_date": "2026.01.19",
+		"compatible_version": "4.3.39-beta"
+	},
+	"localization": {
+		"primary_language": "zh_CN",
+		"available_languages": [
+			"zh_CN",
+			"en_US"
+		],
+		"zh_CN": "中文",
+		"zh_TW": "繁體中文",
+		"en_US": "English",
+		"ja_JP": "日本語",
+		"es_ES": "Español",
+		"fr_FR": "Français",
+		"ru_RU": "Русский",
+		"de_DE": "Deutsch",
+		"ko_KR": "한국어",
+		"it_IT": "Italiano"
+	},
+	"system": {
+		"initialized": false,
+		"last_loaded": "",
+		"link_path": ""
+	}
+}

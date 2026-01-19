@@ -1,0 +1,59 @@
+{
+	"windowTitle": "Spine Hotkeys Editor",
+	"status_linked": "[Linked]",
+	"status_unlinked": "[Unlinked]",
+
+	"groupHotkeyList": "Hotkeys List",
+
+	"labelCategory": "Category:",
+	"labelLanguage": "Language:",
+	"statusLabel": "  Please select the action you want to set a shortcut for",
+	"statusConflict": "Conflict:",
+
+	"btnEditHotkey": "Edit Hotkeys",
+	"btnAddHotkey": "Add Hotkeys",
+	"btnDeleteHotkey": "Delete Hotkeys",
+	"btnQuoteMode": "Character Mode",
+	"btnLink_link": "Link",
+	"btnLink_relink": "Relink",
+	"btnOpenFolder": "Open the Folder",
+	"btnHelp": "User Guide",
+	"btnHotkeyDoc": "Shortcuts Guide",
+	"btnKeyMapping": "Key Mapping",
+	"btnAbout": "About",
+
+	"dialogTitle_link": "Link",
+	"dialogTitle_formatError": "Formatting error",
+	"dialogTitle_warning": "Warning",
+	"dialogTitle_confirm": "Confirm",
+	"dialogTitle_confirmSave": "Confirm Save",
+	"dialogTitle_normalMode": "Normal Mode",
+	"dialogTitle_characterMode": "Character Mode",
+
+	"dialogContent_selectFile": "Please select the correct shortcut configuration file",
+	"dialogContent_duplicateHotkey": "This shortcut is already in use",
+	"dialogContent_conflict": "This shortcut conflicts with an existing one.\nDo you want to remove the existing shortcut?",
+	"dialogContent_saveChanges": "Do you want to save the changes to the shortcuts?",
+	"dialogContent_pressKey": "Please press the key combination you want to set.",
+
+	"btn_ok": "OK",
+	"btn_cancel": "Cancel",
+	"btn_yes": "Yes",
+	"btn_no": "No",
+
+	"dialogTitle_userGuide": "User Guide",
+	"dialogTitle_shortcutsGuide": "Shortcuts Guide",
+	"dialogTitle_keyMapping": "Key Mapping",
+	"dialogTitle_about": "About",
+
+	"userGuide": "● Link to the file path containing the Spine hotkey configuration file\n● Click the input field or the Edit button to enter hotkeys\n● After clicking Confirm, restart Spine or reload the hotkeys in the Editor Settings\n● Click Open Folder to access the linked path, back up the hotkey file, and perform other related operations\n● For advanced hotkey configurations beyond the core processing rules, please modify the hotkey file directly",
+
+	"shortcutsGuide": "● In General Mode, hotkey combinations can use modifier keys such as \"Ctrl\", \"Shift\", and \"Alt\"\n● In Character Mode (Single-quote Mode), only the \"Alt\" modifier key can be used in hotkey combinations\n● When using Character Mode, hotkeys gain long-press functionality: after an initial trigger and a short delay, the action will repeat continuously\n● Character Mode accepts single typable characters ('a'、'ア'、'啊'、'↓'). Some characters have corresponding keywords\n● Special characters not present on a standard keyboard require key mapping in Single-quote Mode; please avoid entering unexpected or unsupported characters",
+
+	"keyMapping": "Standard US keyboard main keyboard area\n'0~9'\t:\t0~9、NUM_(0~9)\n'`'\t:\tGRAVE\n'@'\t:\tAT\n'#'\t:\tPOUND\n'-'\t:\tMINUS\n'+'\t:\tPLUS\n'='\t:\tEQUALS\n'['\t:\tLEFT_BRACKET\n']'\t:\tRIGHT_BRACKET\n'\\'\t:\tBACKSLASH\n';'\t:\tSEMICOLON\n'''\t:\tAPOSTROPHE\n':'\t:\tCOLON\n','\t:\tCOMMA\n'.'\t:\tPERIOD\n'/'\t:\tSLASH\n' '\t:\tSPACE\n'*'\t:\tSTAR",
+
+	"about_designer": "Designer",
+	"about_version": "Version",
+	"about_buildDate": "Build Date",
+	"about_compatible": "Compatible"
+}

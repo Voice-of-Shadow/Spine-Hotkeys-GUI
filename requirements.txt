@@ -1,0 +1,5 @@
+# GUI Framework
+PySide6>=6.10.0
+
+# Packaging Tool
+pyinstaller>=6.16.0
