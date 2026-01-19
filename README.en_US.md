@@ -6,17 +6,18 @@
 
 # Spine Hotkeys Editor
 
-[简体中文](README.md) | **English**
 </div>
 
----
+<br />
+<br />
+
+[简体中文](README.md) | **English**
 
 Spine Hotkeys Editor is a GUI tool for edit Spine shortcuts, developed with PySide6. It aims to replace Spine's extremely primitive method of shortcut customization.
 
+<br />
 
 # Features
-
----
 
 - **Visual Shortcut Editing**
 - **Shortcut Conflict Detection**
@@ -24,19 +25,17 @@ Spine Hotkeys Editor is a GUI tool for edit Spine shortcuts, developed with PySi
 - **Multi-language Support**
 - **Path Linking and Temporary Backup**
 
+<br />
 
 # Screenshots
-
----
 
 <div align="center">
 <img src="https://img.reimu.net/uploads/2026/01/696dd46903c8b9.85363171.png" alt="居中图片" align="center" />
 </div>
 
+<br />
 
 # Run
-
----
 
 #### Run by executing the Python code
 
@@ -47,16 +46,16 @@ python main.py
 
 #### Obtain the executable program Spine Hotkeys Editor.exe through payment
 
-- **Afdian → 6CNY**
-- **BOOTH → 240JPY**
+- **[Afdian → 6CNY](https://afdian.com/item/848b53def54411f0b8845254001e7c00)**
+- **[BOOTH → 240JPY](https://vosaa2a3.booth.pm/items/7895722)**
 
  **(Special note: Due to regional restrictions and other reasons, I am temporarily unable to provide sponsorship channels on platforms such as "Buy Me a Coffee")**
 
  **(Special Note: This build will be release once the promotional video reaches 50,000 views or this project reaches 50 stars. This sale will be considered a pure sponsorship.)**
 
-# Usage Instructions
+<br />
 
----
+# Usage Instructions
 
 #### Core Usage Guide
 
@@ -73,10 +72,9 @@ python main.py
 - **Restore default shortcuts**: Delete the shortcut file or click "Restore Default" in the Spine editor settings.
 - **Switch languages**: Select the corresponding language from the dropdown on the right. Ensure the corresponding language pack exists and is enabled in the configuration.
 
+<br />
 
 # **Shortcuts Guide**
-
----
 
 - In General Mode, hotkey combinations can use modifier keys such as "Ctrl", "Shift", and "Alt".
 - In Character Mode (Single-quote Mode), only the "Alt" modifier key can be used in hotkey combinations.
@@ -84,10 +82,9 @@ python main.py
 - Character Mode accepts single typable characters ('a'、'ア'、'啊'、'↓'). Some characters have corresponding keywords.
 - Special characters not present on a standard keyboard require key mapping in Single-quote Mode; please avoid entering unexpected or unsupported characters.
 
+<br />
 
 # compatibility instructions
-
----
 
 The GUI program works by parsing the structure of Spine shortcut files and performing data conversion. Therefore, its functionality theoretically covers shortcut files for all current versions of Spine.
 
@@ -95,17 +92,15 @@ Displayed text uses corresponding values from the language pack. Since shortcuts
 
 As shortcuts are primarily added with version updates, the currently provided language pack is created using the shortcut file from the latest version of Spine.
 
+<br />
 
 # Changelog
 
----
-
 To be created in the next update.
 
+<br />
 
 # Other instructions
-
----
 
 - Development Motivation：70% plenty of free time(long-term unemployment), 20% frustration with Spine's extremely primitive shortcut editing method, 9% as the final act of cutting ties with 2D animation production, **100‰ for contributing to the community**.
 
@@ -116,10 +111,9 @@ To be created in the next update.
 - Special Note: Under the current latest beta version (4.3.39-beta), in Character Mode, 'PLUS' → will be flagged as an invalid character by the Spine editor, and '+' will cause a direct error, rendering all hotkeys unusable. Although input is not prohibited by design, please treat this character as unexpected input and avoid using it. Official feedback confirms it will be fixed in the next version.
 - Special Note: The current program's preprocessing stage cannot exclude all unexpected shortcuts (i.e., syntactically valid but with invalid keys or unrecognizable by the Spine editor).
 
+<br />
 
 # Contributions
-
----
 
 Code contributions and additional localized language packs are welcome.
 
@@ -141,22 +135,20 @@ Code contributions and additional localized language packs are welcome.
    - Expand shortcut description texts (`[KeyName].note`).
    - Add more internationalized language packs.
 
+<br />
 
 # Support
 
----
-
 If this project is helpful to you, please feel free to share it.
 
-you can support it by **[sponsoring on Afdian](https://afdian.com/a/VOSAA2A3)** or **[via Bilibili charging](https://space.bilibili.com/23488880)**. No need for large donations, I'd be happy if you could treat me to a cup of milk tea.
+you can support it by **[sponsoring on Afdian](https://afdian.com/a/VOSAA2A3)** or **[via Bilibili charging](https://space.bilibili.com/23488880)**. I'd be happy if you could treat me to a cup of milk tea.
 
 You can follow my Bilibili account, where I will post my works and tutorials.
 
 Link: [https://space.bilibili.com/23488880](https://space.bilibili.com/23488880)
 
+<br />
 
 # License
-
----
 
 This project is open-sourced under the [MIT](LICENSE) license. See the LICENSE file for details.
