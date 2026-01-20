@@ -337,8 +337,18 @@ class Controller:
         
         self.dialog.combo_category.blockSignals(False)
     
-    def _render_hotkey_list(self):
-        """渲染快捷键列表"""
+    def _render_hotkey_list(self, preserve_selection: bool = False, target_row: int = -1):
+        """
+        渲染快捷键列表
+        
+        Args:
+            preserve_selection: 是否保持之前的选中状态
+            target_row: 指定要选中的行索引（-1表示使用当前选中行）
+        """
+        current_row = self.dialog.get_selected_row()
+        scroll_bar = self.dialog.hotkey_table.verticalScrollBar()
+        scroll_position = scroll_bar.value()
+        
         self.dialog.clear_hotkey_list()
         self.row_data_map.clear()
         
@@ -373,6 +383,15 @@ class Controller:
                     self.dialog.add_hotkey_row(name_display, shortcut, show_warning)
                     self.row_data_map[row_index] = (self.current_category, cmd_id, idx)
                     row_index += 1
+
+        scroll_bar.setValue(scroll_position)
+
+        if preserve_selection or target_row >= 0:
+            row_to_select = target_row if target_row >= 0 else current_row
+            if row_to_select >= 0 and row_to_select < self.dialog.hotkey_table.rowCount():
+                if row_to_select not in self.dialog._separator_rows:
+                    self.dialog.hotkey_table.selectRow(row_to_select)
+                    self.dialog._selected_row = row_to_select
     
     def on_category_changed(self, index: int):
         """处理类别切换"""
@@ -471,7 +490,7 @@ class Controller:
         else:
             self.hotkey_manager.set_shortcut_at_index(cat_id, cmd_id, idx, new_hotkey)
         
-        self._render_hotkey_list()
+        self._render_hotkey_list(preserve_selection=True)
         self._update_button_states()
     
     def on_add_hotkey(self):
@@ -484,6 +503,18 @@ class Controller:
         new_idx = self.hotkey_manager.add_empty_shortcut(cat_id, cmd_id)
         if new_idx >= 0:
             self._render_hotkey_list()
+            
+            target_row = -1
+            for row, (r_cat, r_cmd, r_idx) in self.row_data_map.items():
+                if r_cat == cat_id and r_cmd == cmd_id and r_idx == new_idx:
+                    target_row = row
+                    break
+
+            if target_row >= 0 and target_row < self.dialog.hotkey_table.rowCount():
+                if target_row not in self.dialog._separator_rows:
+                    self.dialog.hotkey_table.selectRow(target_row)
+                    self.dialog._selected_row = target_row
+            
             self._update_button_states()
     
     def on_delete_hotkey(self):
@@ -505,12 +536,20 @@ class Controller:
         if idx >= len(shortcuts):
             return
         
+        selected_row = self.dialog.get_selected_row()
+        target_row = selected_row
+        
+        is_first_shortcut = (idx == 0)
+        
         if len(shortcuts) == 1:
             self.hotkey_manager.set_shortcut_at_index(cat_id, cmd_id, 0, "")
         else:
             self.hotkey_manager.remove_shortcut_at_index(cat_id, cmd_id, idx)
+            
+            if not is_first_shortcut and selected_row > 0:
+                target_row = selected_row - 1
         
-        self._render_hotkey_list()
+        self._render_hotkey_list(target_row=target_row)
         self._update_button_states()
     
     def on_open_folder(self):
