@@ -96,7 +96,7 @@ As shortcuts are primarily added with version updates, the currently provided la
 
 # Changelog
 
-To be created in the next update.
+[Changelog_Chinese](CHANGELOG.md)
 
 <br />
 
