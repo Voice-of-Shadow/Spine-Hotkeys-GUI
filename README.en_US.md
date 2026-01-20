@@ -30,7 +30,7 @@ Spine Hotkeys Editor is a GUI tool for edit Spine shortcuts, developed with PySi
 # Screenshots
 
 <div align="center">
-<img src="https://img.reimu.net/uploads/2026/01/696dd46903c8b9.85363171.png" alt="居中图片" align="center" />
+<img src="https://img.reimu.net/uploads/2026/01/696f9a4880fa52.82162354.png" alt="居中图片" align="center" />
 </div>
 
 <br />

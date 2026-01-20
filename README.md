@@ -30,7 +30,7 @@ Spine Hotkeys Editor 是一个用于修改Spine快捷方式的界面工具，基
 # 界面截图
 
 <div align="center">
-<img src="https://img.reimu.net/uploads/2026/01/696dd46903c8b9.85363171.png" alt="居中图片" align="center" />
+<img src="https://img.reimu.net/uploads/2026/01/696f9a487f8c37.77439425.png" alt="居中图片" align="center" />
 </div>
 
 <br />
