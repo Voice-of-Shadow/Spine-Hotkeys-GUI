@@ -37,6 +37,7 @@
 	"dialogContent_pressKey": "Please press the key combination you want to set.",
 
 	"btn_ok": "OK",
+	"btn_save": "Save",
 	"btn_cancel": "Cancel",
 	"btn_yes": "Yes",
 	"btn_no": "No",

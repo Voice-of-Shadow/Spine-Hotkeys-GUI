@@ -105,11 +105,12 @@ class HotkeyDialog(QDialog):
         self.label_status.setObjectName("statusLabel")
         
         self.button_box = QDialogButtonBox(
-            QDialogButtonBox.Ok | QDialogButtonBox.Cancel
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Save | QDialogButtonBox.StandardButton.Cancel
         )
         self.button_box.setObjectName("dialogButtonBox")
-        self.button_box.button(QDialogButtonBox.Ok).setText("确认")
-        self.button_box.button(QDialogButtonBox.Cancel).setText("取消")
+        self.button_box.button(QDialogButtonBox.StandardButton.Ok).setText("确认")
+        self.button_box.button(QDialogButtonBox.StandardButton.Save).setText("保存")
+        self.button_box.button(QDialogButtonBox.StandardButton.Cancel).setText("取消")
     
     def _setup_hotkey_table(self):
         """配置快捷键表格"""

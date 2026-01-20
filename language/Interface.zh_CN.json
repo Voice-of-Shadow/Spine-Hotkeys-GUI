@@ -37,6 +37,7 @@
 	"dialogContent_pressKey": "请从键盘按下要设置的快捷键",
 
 	"btn_ok": "确认",
+	"btn_save": "保存",
 	"btn_cancel": "取消",
 	"btn_yes": "是",
 	"btn_no": "否",

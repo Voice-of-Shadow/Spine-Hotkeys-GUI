@@ -65,8 +65,12 @@ class Controller:
         self.dialog.btn_hotkey_doc.clicked.connect(lambda: self.on_info_button('hotkey_doc'))
         self.dialog.btn_key_mapping.clicked.connect(lambda: self.on_info_button('key_mapping'))
         self.dialog.btn_about.clicked.connect(lambda: self.on_info_button('about'))
-        self.dialog.button_box.accepted.connect(self.on_save)
-        self.dialog.button_box.rejected.connect(self.on_cancel)
+
+        from PySide6.QtWidgets import QDialogButtonBox
+        self.dialog.button_box.button(QDialogButtonBox.StandardButton.Ok).clicked.connect(self.on_save)
+        self.dialog.button_box.button(QDialogButtonBox.StandardButton.Save).clicked.connect(self.on_save_only)
+        self.dialog.button_box.button(QDialogButtonBox.StandardButton.Cancel).clicked.connect(self.on_cancel)
+        
         self.dialog.combo_category.currentIndexChanged.connect(self.on_category_changed)
         self.dialog.combo_language.currentIndexChanged.connect(self.on_language_changed)
         self.dialog.hotkey_table.itemSelectionChanged.connect(self.on_selection_changed)
@@ -146,10 +150,13 @@ class Controller:
         )
         
         from PySide6.QtWidgets import QDialogButtonBox
-        self.dialog.button_box.button(QDialogButtonBox.Ok).setText(
+        self.dialog.button_box.button(QDialogButtonBox.StandardButton.Ok).setText(
             self.i18n_manager.get_text("btn_ok", "确认")
         )
-        self.dialog.button_box.button(QDialogButtonBox.Cancel).setText(
+        self.dialog.button_box.button(QDialogButtonBox.StandardButton.Save).setText(
+            self.i18n_manager.get_text("btn_save", "保存")
+        )
+        self.dialog.button_box.button(QDialogButtonBox.StandardButton.Cancel).setText(
             self.i18n_manager.get_text("btn_cancel", "取消")
         )
     
@@ -672,6 +679,49 @@ class Controller:
                     return
         
         self.dialog.accept()
+    
+    def on_save_only(self):
+        """处理仅保存操作，不退出程序"""
+        from ui.dialogs import ConfirmDialog, AlertDialog
+        
+        if not self.is_linked:
+            return
+
+        if not self.hotkey_manager.is_modified():
+            return
+
+        result = ConfirmDialog.ask(
+            self.dialog,
+            self.i18n_manager.get_text("dialogTitle_confirmSave", "确认保存"),
+            self.i18n_manager.get_text("dialogContent_saveChanges", "是否保存对快捷键的修改？"),
+            self.i18n_manager.get_text("btn_yes", "是"),
+            self.i18n_manager.get_text("btn_no", "否"),
+            self.i18n_manager.get_text("btn_cancel", "取消")
+        )
+
+        if result == ConfirmDialog.CANCEL:
+            return
+
+        if result == ConfirmDialog.NO:
+            return
+
+        if result == ConfirmDialog.YES:
+            self.hotkey_manager.save_to_json()
+            json_path = self.hotkey_manager.get_json_path()
+            link_path = self.config_manager.get_link_path()
+            
+            if json_path and link_path:
+                try:
+                    FileConverter.json_to_txt(json_path, link_path)
+                except Exception as e:
+                    AlertDialog.show_alert(
+                        self.dialog,
+                        self.i18n_manager.get_text("dialogTitle_formatError", "错误"),
+                        str(e),
+                        self.i18n_manager.get_text("btn_ok", "确认")
+                    )
+                    return
+        
     
     def on_cancel(self):
         """处理取消操作"""

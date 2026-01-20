@@ -229,18 +229,18 @@ QDialogButtonBox QPushButton {
     border-radius: 4px;
 }
 
-QDialogButtonBox QPushButton[text="确认"] {
+QDialogButtonBox QPushButton[text="确认"], QDialogButtonBox QPushButton[text="保存"] {
     background-color: #1070e0;
     color: white;
     border: 1px solid #0e63c6;
 }
 
-QDialogButtonBox QPushButton[text="确认"]:hover {
+QDialogButtonBox QPushButton[text="确认"]:hover, QDialogButtonBox QPushButton[text="保存"]:hover {
     background-color: #0f69d2;
     border: 1px solid #5899e5;
 }
 
-QDialogButtonBox QPushButton[text="确认"]:pressed {
+QDialogButtonBox QPushButton[text="确认"]:pressed, QDialogButtonBox QPushButton[text="保存"]:pressed {
     background-color: #0d58b0;
     border: 1px solid #5794dd;
 }
