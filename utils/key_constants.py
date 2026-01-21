@@ -156,6 +156,54 @@ QT_NUMPAD_KEYS = {
     Qt.Key_3: 'NUMPAD_3', Qt.Key_4: 'NUMPAD_4', Qt.Key_5: 'NUMPAD_5',
     Qt.Key_6: 'NUMPAD_6', Qt.Key_7: 'NUMPAD_7', Qt.Key_8: 'NUMPAD_8',
     Qt.Key_9: 'NUMPAD_9',
+    # 小键盘符号键
+    Qt.Key_Slash: 'NUMPAD_DIVIDE',
+    Qt.Key_Asterisk: 'NUMPAD_MULTIPLY',
+    Qt.Key_Minus: 'NUMPAD_MINUS',
+    Qt.Key_Plus: 'NUMPAD_PLUS',
+    Qt.Key_Period: 'NUMPAD_DOT',
+    Qt.Key_Enter: 'NUMPAD_ENTER',
+    Qt.Key_Equal: 'NUMPAD_EQUALS',
+}
+
+# Shift + 小键盘时，功能键映射回小键盘数字键
+# 当 NumLock 开启且按下 Shift 时，小键盘数字键会变成功能键
+QT_KEYPAD_SHIFT_MAP = {
+    Qt.Key_Insert: 'NUMPAD_0',
+    Qt.Key_End: 'NUMPAD_1',
+    Qt.Key_Down: 'NUMPAD_2',
+    Qt.Key_PageDown: 'NUMPAD_3',
+    Qt.Key_Left: 'NUMPAD_4',
+    Qt.Key_Clear: 'NUMPAD_5',
+    Qt.Key_Right: 'NUMPAD_6',
+    Qt.Key_Home: 'NUMPAD_7',
+    Qt.Key_Up: 'NUMPAD_8',
+    Qt.Key_PageUp: 'NUMPAD_9',
+    Qt.Key_Delete: 'NUMPAD_DOT',
+}
+
+QT_SHIFT_KEY_TO_PHYSICAL = {
+    Qt.Key_Exclam: 'NUM_1',
+    Qt.Key_At: 'NUM_2',
+    Qt.Key_NumberSign: 'NUM_3',
+    Qt.Key_Dollar: 'NUM_4',
+    Qt.Key_Percent: 'NUM_5',
+    Qt.Key_AsciiCircum: 'NUM_6',
+    Qt.Key_Ampersand: 'NUM_7',
+    Qt.Key_Asterisk: 'NUM_8',
+    Qt.Key_ParenLeft: 'NUM_9',
+    Qt.Key_ParenRight: 'NUM_0',
+    Qt.Key_Underscore: 'MINUS',
+    Qt.Key_Plus: 'EQUALS',
+    Qt.Key_BraceLeft: 'LEFT_BRACKET',
+    Qt.Key_BraceRight: 'RIGHT_BRACKET',
+    Qt.Key_Bar: 'BACKSLASH',
+    Qt.Key_Colon: 'SEMICOLON',
+    Qt.Key_QuoteDbl: 'APOSTROPHE',
+    Qt.Key_Less: 'COMMA',
+    Qt.Key_Greater: 'PERIOD',
+    Qt.Key_Question: 'SLASH',
+    Qt.Key_AsciiTilde: 'GRAVE',
 }
 
 
@@ -164,10 +212,13 @@ def is_numpad_key(key_name: str) -> bool:
     return key_name in NUMPAD_KEYS
 
 
-def get_key_name_from_qt(qt_key: int, is_keypad: bool = False) -> str:
+def get_key_name_from_qt(qt_key: int, is_keypad: bool = False, shift_pressed: bool = False) -> str:
     """从 Qt 键码获取键名"""
-    if is_keypad and qt_key in QT_NUMPAD_KEYS:
-        return QT_NUMPAD_KEYS[qt_key]
+    if is_keypad:
+        if qt_key in QT_NUMPAD_KEYS:
+            return QT_NUMPAD_KEYS[qt_key]
+        if shift_pressed and qt_key in QT_KEYPAD_SHIFT_MAP:
+            return QT_KEYPAD_SHIFT_MAP[qt_key]
     return QT_KEY_TO_NAME.get(qt_key, '')
 
 

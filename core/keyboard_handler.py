@@ -16,6 +16,7 @@ from utils.key_constants import (
     SHIFT_CHAR_MAP,
     MODIFIER_ORDER,
     QT_KEY_TO_NAME,
+    QT_SHIFT_KEY_TO_PHYSICAL,
     get_key_name_from_qt,
     is_numpad_key
 )
@@ -105,7 +106,13 @@ class KeyboardHandler:
         qt_key = event.key()
         
         is_keypad = bool(event.modifiers() & Qt.KeypadModifier)
-        key_name = get_key_name_from_qt(qt_key, is_keypad)
+
+        if is_keypad:
+            key_name = get_key_name_from_qt(qt_key, is_keypad=True, shift_pressed=shift)
+        elif qt_key in QT_SHIFT_KEY_TO_PHYSICAL:
+            key_name = QT_SHIFT_KEY_TO_PHYSICAL[qt_key]
+        else:
+            key_name = get_key_name_from_qt(qt_key, is_keypad=False)
         
         if not key_name:
             text = event.text().upper()

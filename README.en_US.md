@@ -103,13 +103,13 @@ As shortcuts are primarily added with version updates, the currently provided la
 # Other instructions
 
 - Development Motivation：70% plenty of free time(long-term unemployment), 20% frustration with Spine's extremely primitive shortcut editing method, 9% as the final act of cutting ties with 2D animation production, **100‰ for contributing to the community**.
-
 - Development Direction：Overall reference to Live2D's shortcut GUI modification logic and layout.
 - Special Note：I am not a professional software developer. Code, configuration, and program logic design may be unreasonable, non-standard, or non-standardized. Feature additions, code improvements, and project optimizations will be left to future contributors (I still hope the official team would develop one, it has been pending for years).
 - Special Note: I do not know English. The default English documentation is machine-translated. English localization optimization is needed.
 - Special Note: This program is only compatible with standard US keyboards.
 - Special Note: Under the current latest beta version (4.3.39-beta), in Character Mode, 'PLUS' → will be flagged as an invalid character by the Spine editor, and '+' will cause a direct error, rendering all hotkeys unusable. Although input is not prohibited by design, please treat this character as unexpected input and avoid using it. Official feedback confirms it will be fixed in the next version.
 - Special Note: The current program's preprocessing stage cannot exclude all unexpected shortcuts (i.e., syntactically valid but with invalid keys or unrecognizable by the Spine editor).
+- Special Note: Due to Windows limitations, `Shift + NUMPAD_(0~9/.)` is always converted to navigation keys regardless of the `NumLock` state. This is a system-level restriction. Spine, unlike software such as After Effects (AE), does not implement low-level system hooks and thus cannot recognize the navigation keys on the numpad. Therefore, if you need to force the input, you must modify the system-wide key mapping. This can be done by binding key remappings using tools like AutoHotkey or PowerToys. However, in this scenario, only the right Shift key (RShift) can be registered, while the left Shift key (LShift) will be blocked. For smoother usage, it is recommended to avoid hotkeys in the `Shift + NUMPAD_(0~9/.)` series.
 
 <br />
 
