@@ -490,7 +490,15 @@ class Controller:
                 return
             elif result == ConfirmDialog.YES:
                 for conflict_cat, conflict_cmd in conflicts:
-                    self.hotkey_manager.remove_shortcut(conflict_cat, conflict_cmd, new_hotkey)
+                    conflict_item = self.hotkey_manager.get_item(conflict_cat, conflict_cmd)
+                    if conflict_item:
+                        conflict_shortcuts = conflict_item.get("shortcuts", [])
+                        if new_hotkey in conflict_shortcuts:
+                            conflict_idx = conflict_shortcuts.index(new_hotkey)
+                            if len(conflict_shortcuts) == 1:
+                                self.hotkey_manager.set_shortcut_at_index(conflict_cat, conflict_cmd, 0, "")
+                            else:
+                                self.hotkey_manager.remove_shortcut_at_index(conflict_cat, conflict_cmd, conflict_idx)
         
         if old_hotkey:
             self.hotkey_manager.update_shortcut(cat_id, cmd_id, old_hotkey, new_hotkey)
