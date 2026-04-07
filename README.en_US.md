@@ -51,7 +51,7 @@ python main.py
 
  **(Special note: Due to regional restrictions and other reasons, I am temporarily unable to provide sponsorship channels on platforms such as "Buy Me a Coffee")**
 
- **(Special Note: This build will be release once the promotional video reaches 50,000 views or this project reaches 50 stars. This sale will be considered a pure sponsorship.)**
+ **(Special Note: This build will be release once the promotional video reaches 10,000 views or this project reaches 20 stars. This sale will be considered a pure sponsorship.)**
 
 <br />
 
@@ -97,6 +97,14 @@ As shortcuts are primarily added with version updates, the currently provided la
 # Changelog
 
 [Changelog_Chinese](CHANGELOG.md)
+
+<br />
+
+# Planned Updates
+
+ **Features**：
+ - Search: Search for shortcut names and key combinations.
+ - Export: Quickly export shortcuts as images or tables.
 
 <br />
 
