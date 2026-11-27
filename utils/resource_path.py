@@ -30,7 +30,7 @@ def get_bundled_resource_path(relative_path: str) -> str:
     获取打包到exe中的资源路径（如icon、styles）
     
     Args:
-        relative_path: 相对路径（如 "icon/icon.png"）
+        relative_path: 相对路径（如 "icon/icon (00000).ico"）
         
     Returns:
         资源文件的完整路径

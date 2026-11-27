@@ -11,38 +11,16 @@ from PySide6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel,
     QPushButton, QTextBrowser, QWidget, QFrame
 )
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QIcon, QKeyEvent
+from PySide6.QtCore import Qt, QEvent, Signal
+from PySide6.QtGui import QKeyEvent
 
 import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from core.keyboard_handler import KeyboardHandler
+from .theme import ThemedDialog
 
 
-def _load_global_stylesheet() -> str:
-    """加载全局样式表"""
-    from utils.resource_path import get_bundled_resource_path
-    
-    style_path = get_bundled_resource_path("styles/style.qss")
-    if os.path.exists(style_path):
-        with open(style_path, "r", encoding="utf-8") as f:
-            stylesheet = f.read()
-        
-        icon_dir = get_bundled_resource_path("icon")
-        icon_dir = icon_dir.replace(os.sep, '/')
-        stylesheet = stylesheet.replace('./icon/', f'{icon_dir}/')
-        
-        return stylesheet
-    return ""
-
-
-def _get_icon_path() -> str:
-    """获取图标路径"""
-    from utils.resource_path import get_bundled_resource_path
-    return get_bundled_resource_path("icon/icon.png")
-
-
-class InfoDialog(QDialog):
+class InfoDialog(ThemedDialog):
     """
     信息提示窗 (A)
     用于信息展示（使用说明、快捷键说明、关键字对应、程序信息）
@@ -71,10 +49,6 @@ class InfoDialog(QDialog):
         else:
             self.setMinimumSize(400, 250)
         
-        icon_path = _get_icon_path()
-        if os.path.exists(icon_path):
-            self.setWindowIcon(QIcon(icon_path))
-        
         layout = QVBoxLayout(self)
         layout.setContentsMargins(20, 20, 20, 20)
         layout.setSpacing(15)
@@ -84,7 +58,6 @@ class InfoDialog(QDialog):
             self.content_browser.setObjectName("aboutContent")
             self.content_browser.setOpenExternalLinks(True)
             self.content_browser.setReadOnly(True)
-            self.content_browser.setStyleSheet("background-color: transparent; border: none;")
             self.content_browser.setMarkdown(content)
             layout.addWidget(self.content_browser, 4)
         else:
@@ -108,11 +81,9 @@ class InfoDialog(QDialog):
         button_layout.addWidget(self.btn_ok)
         button_layout.addStretch()
         layout.addLayout(button_layout, 1)
-        
-        self.setStyleSheet(_load_global_stylesheet())
 
 
-class AlertDialog(QDialog):
+class AlertDialog(ThemedDialog):
     """
     单按钮提示窗
     用于 warning、link、formatError 类型的提示
@@ -135,10 +106,6 @@ class AlertDialog(QDialog):
         self.setMinimumSize(350, 150)
         self.setModal(True)
         
-        icon_path = _get_icon_path()
-        if os.path.exists(icon_path):
-            self.setWindowIcon(QIcon(icon_path))
-        
         layout = QVBoxLayout(self)
         layout.setContentsMargins(20, 20, 20, 20)
         layout.setSpacing(15)
@@ -158,8 +125,6 @@ class AlertDialog(QDialog):
         button_layout.addStretch()
         layout.addLayout(button_layout, 1)
         
-        self.setStyleSheet(_load_global_stylesheet())
-    
     @staticmethod
     def show_alert(parent: Optional[QWidget], title: str, content: str,
                    button_text: str = "确认") -> None:
@@ -170,7 +135,7 @@ class AlertDialog(QDialog):
         dialog.exec()
 
 
-class ConfirmDialog(QDialog):
+class ConfirmDialog(ThemedDialog):
     """
     操作确认窗 (B)
     用于重要操作确认，提供是/否/取消三个选项
@@ -200,10 +165,6 @@ class ConfirmDialog(QDialog):
         
         self._result = self.CANCEL
         
-        icon_path = _get_icon_path()
-        if os.path.exists(icon_path):
-            self.setWindowIcon(QIcon(icon_path))
-        
         layout = QVBoxLayout(self)
         layout.setContentsMargins(20, 20, 20, 20)
         layout.setSpacing(15)
@@ -218,23 +179,6 @@ class ConfirmDialog(QDialog):
         
         self.btn_yes = QPushButton(yes_text)
         self.btn_yes.setObjectName("btnYes")
-        self.btn_yes.setStyleSheet("""
-            QPushButton#btnYes {
-                background-color: #1070e0;
-                color: white;
-                border: 1px solid #0d5dbf;
-                border-radius: 4px;
-                padding: 5px 15px;
-                min-width: 80px;
-                min-height: 28px;
-            }
-            QPushButton#btnYes:hover {
-                background-color: #0d5dbf;
-            }
-            QPushButton#btnYes:pressed {
-                background-color: #0a4a9e;
-            }
-        """)
         self.btn_yes.clicked.connect(self._on_yes)
         button_layout.addWidget(self.btn_yes)
         
@@ -251,8 +195,6 @@ class ConfirmDialog(QDialog):
         button_layout.addStretch()
         layout.addLayout(button_layout, 1)
         
-        self.setStyleSheet(_load_global_stylesheet())
-    
     def _on_yes(self):
         """处理"是"按钮点击"""
         self._result = self.YES
@@ -287,7 +229,7 @@ class ConfirmDialog(QDialog):
         return dialog.get_result()
 
 
-class KeyInputDialog(QDialog):
+class KeyInputDialog(ThemedDialog):
     """
     录入提示窗 (C)
     用于快捷键录入，监听键盘输入
@@ -298,7 +240,8 @@ class KeyInputDialog(QDialog):
     def __init__(self, parent: Optional[QWidget], mode: str = 'normal',
                  current_hotkey: str = "", mode_text: str = "一般模式",
                  prompt_text: str = "请从键盘按下要设置的快捷键",
-                 delete_text: str = "删除快捷键", cancel_text: str = "取消"):
+                 delete_text: str = "删除快捷键", cancel_text: str = "取消",
+                 *, search_only: bool = False):
         """
         初始化录入提示窗
         
@@ -314,6 +257,7 @@ class KeyInputDialog(QDialog):
         super().__init__(parent)
         
         self.mode = mode
+        self._search_only = search_only
         self.current_hotkey = current_hotkey
         self._captured_hotkey: Optional[str] = None
         self._deleted = False
@@ -322,10 +266,6 @@ class KeyInputDialog(QDialog):
         self.setWindowTitle(mode_text)
         self.setFixedSize(400, 160)
         self.setModal(True)
-        
-        icon_path = _get_icon_path()
-        if os.path.exists(icon_path):
-            self.setWindowIcon(QIcon(icon_path))
         
         layout = QVBoxLayout(self)
         layout.setContentsMargins(20, 20, 20, 20)
@@ -339,9 +279,11 @@ class KeyInputDialog(QDialog):
         button_layout = QHBoxLayout()
         button_layout.addStretch()
         
-        self.btn_delete = QPushButton(delete_text)
+        # 设置可见性前先指定父窗口，避免按钮被显示成独立窗口。
+        self.btn_delete = QPushButton(delete_text, self)
         self.btn_delete.setObjectName("btnCancel")
         self.btn_delete.setEnabled(bool(current_hotkey))
+        self.btn_delete.setHidden(search_only)
         self.btn_delete.clicked.connect(self._on_delete)
         button_layout.addWidget(self.btn_delete)
         
@@ -354,7 +296,19 @@ class KeyInputDialog(QDialog):
         layout.addLayout(button_layout, 1)
         
         self.setFocusPolicy(Qt.StrongFocus)
-        self.setStyleSheet(_load_global_stylesheet())
+        if search_only:
+            self.btn_cancel.setAutoDefault(False)
+            self.btn_cancel.setFocusPolicy(Qt.NoFocus)
+            self.setFocus()
+
+    def event(self, event):
+        # 录入搜索时也要捕获 Tab、回车和空格，它们通常会被 Qt 用于导航或激活按钮。
+        if event.type() == QEvent.Type.KeyPress and self._search_only:
+            if not event.isAutoRepeat():
+                self.keyPressEvent(event)
+            event.accept()
+            return True
+        return super().event(event)
     
     def keyPressEvent(self, event: QKeyEvent) -> None:
         """处理键盘按下事件"""
@@ -392,7 +346,7 @@ class KeyInputDialog(QDialog):
                 current_hotkey: str = "", mode_text: str = "一般模式",
                 prompt_text: str = "请从键盘按下要设置的快捷键",
                 delete_text: str = "删除快捷键",
-                cancel_text: str = "取消") -> Optional[str]:
+                cancel_text: str = "取消", *, search_only: bool = False) -> Optional[str]:
         """
         静态方法：显示录入对话框并返回结果
         
@@ -401,7 +355,7 @@ class KeyInputDialog(QDialog):
         """
         dialog = KeyInputDialog(
             parent, mode, current_hotkey, mode_text,
-            prompt_text, delete_text, cancel_text
+            prompt_text, delete_text, cancel_text, search_only=search_only
         )
         result = dialog.exec()
         

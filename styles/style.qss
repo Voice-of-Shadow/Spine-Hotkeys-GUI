@@ -1,9 +1,10 @@
 QDialog {
-    background-color: #f2f2f2;
+    background-color: palette(window);
 }
 
 QGroupBox {
-    border: 2px solid #cccccc;
+    color: palette(window-text);
+    border: 2px solid palette(mid);
     border-radius: 4px;
     margin-top: 8px;
     padding-top: 8px;
@@ -15,20 +16,20 @@ QGroupBox::title {
     subcontrol-position: top left;
     left: 10px;
     padding: 0 5px;
-    background-color: #f2f2f2;
+    background-color: palette(window);
 }
 
 QComboBox {
-    background-color: white;
-    border: 1px solid #cccccc;
+    background-color: palette(base);
+    border: 1px solid palette(mid);
     border-radius: 4px;
-    padding: 4px 8px;
-    color: black;
+    padding: 4px 24px 4px 8px;
+    color: palette(text);
     min-height: 20px;
 }
 
 QComboBox:hover {
-    border: 1px solid #70a9ec;
+    border: 1px solid palette(accent);
 }
 
 QComboBox::drop-down {
@@ -39,51 +40,57 @@ QComboBox::drop-down {
 }
 
 QComboBox::down-arrow {
-    image: url(./icon/down_arrow.png);
+    image: url("./icon/down_arrow.png");
     width: 12px;
     height: 12px;
 }
 
 QComboBox QAbstractItemView {
-    background-color: white;
-    border: 1px solid #cccccc;
-    selection-background-color: #d3d3d3;
+    color: palette(text);
+    selection-color: palette(highlighted-text);
+    background-color: palette(base);
+    border: 1px solid palette(mid);
+    selection-background-color: palette(highlight);
 }
 
 QPushButton {
-    background-color: white;
-    border: 1px solid #cccccc;
+    background-color: palette(button);
+    border: 1px solid palette(mid);
     border-radius: 4px;
     padding: 4px 6px;
-    color: black;
+    color: palette(text);
     min-height: 20px;
 }
 
 QPushButton:hover {
-    background-color: #f8f8f8;
-    border: 1px solid #70a9ec;
+    background-color: palette(light);
+    border: 1px solid palette(accent);
+}
+
+QPushButton#btnCaptureSearch:focus {
+    border: 1px solid palette(accent);
 }
 
 QPushButton:pressed {
-    background-color: #e6e6e6;
-    border: 1px solid #6ca3e3;
+    background-color: palette(midlight);
+    border: 1px solid palette(accent);
 }
 
-QPushButton:disabled {
-    background-color: #f2f2f2;
-    border: 1px solid #cccccc;
-    color: #cccccc;
+QPushButton:disabled, QComboBox:disabled, QLineEdit:disabled {
+    background-color: palette(window);
+    border: 1px solid palette(mid);
+    color: palette(placeholder-text);
 }
 
 QPushButton#btnQuoteMode[active="true"] {
-    background-color: #c9e8ff;
-    border: 1px solid #70a9ec;
+    background-color: palette(highlight);
+    border: 1px solid palette(accent);
     font-weight: bold;
 }
 
 QTableWidget {
-    border: 1px solid #cccccc;
-    background-color: white;
+    border: 1px solid palette(mid);
+    background-color: palette(base);
     gridline-color: transparent;
     outline: none;
 }
@@ -96,34 +103,19 @@ QTableWidget::item {
 }
 
 QTableWidget::item:selected {
-    background-color: #d3d3d3;
+    background-color: palette(highlight);
 }
 
 QTableWidget::item:disabled {
     padding: 0px;
     margin: 0px;
-    background-color: #cccccc;
+    background-color: palette(mid);
     min-height: 1px;
     max-height: 1px;
 }
 
-QTableWidget QWidget {
-    background-color: transparent;
-}
-
-QTableWidget QLineEdit {
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 2px;
-    padding: 4px;
-}
-
-QTableWidget QLabel {
-    background-color: transparent;
-}
-
 QScrollBar:vertical {
-    background-color: #f2f2f2;
+    background-color: palette(window);
     width: 12px;
     border: none;
     margin: 0px;
@@ -131,18 +123,15 @@ QScrollBar:vertical {
 }
 
 QScrollBar::handle:vertical {
-    background-color: #dcdcdc;
+    background-color: palette(dark);
     min-height: 30px;
     border-radius: 6px;
     margin: 2px;
 }
 
-QScrollBar::handle:vertical:hover {
-    background-color: #c3c3c3;
-}
-
+QScrollBar::handle:vertical:hover,
 QScrollBar::handle:vertical:pressed {
-    background-color: #a9a9a9;
+    background-color: palette(shadow);
 }
 
 QScrollBar::add-line:vertical,
@@ -153,16 +142,11 @@ QScrollBar::sub-line:vertical {
 
 QScrollBar::add-page:vertical,
 QScrollBar::sub-page:vertical {
-    background: #f2f2f2;
-}
-
-QScrollBar::add-page:vertical:hover,
-QScrollBar::sub-page:vertical:hover {
-    background: #ededed;
+    background: palette(window);
 }
 
 QScrollBar:horizontal {
-    background-color: #f2f2f2;
+    background-color: palette(window);
     height: 12px;
     border: none;
     margin: 0px;
@@ -170,18 +154,15 @@ QScrollBar:horizontal {
 }
 
 QScrollBar::handle:horizontal {
-    background-color: #dcdcdc;
+    background-color: palette(dark);
     min-width: 30px;
     border-radius: 6px;
     margin: 2px;
 }
 
-QScrollBar::handle:horizontal:hover {
-    background-color: #c3c3c3;
-}
-
+QScrollBar::handle:horizontal:hover,
 QScrollBar::handle:horizontal:pressed {
-    background-color: #a9a9a9;
+    background-color: palette(shadow);
 }
 
 QScrollBar::add-line:horizontal,
@@ -192,28 +173,27 @@ QScrollBar::sub-line:horizontal {
 
 QScrollBar::add-page:horizontal,
 QScrollBar::sub-page:horizontal {
-    background: #f2f2f2;
-}
-
-QScrollBar::add-page:horizontal:hover,
-QScrollBar::sub-page:horizontal:hover {
-    background: #ededed;
+    background: palette(window);
 }
 
 QLineEdit {
-    background-color: white;
-    border: 1px solid #cccccc;
+    background-color: palette(base);
+    border: 1px solid palette(mid);
     border-radius: 2px;
     padding: 4px;
-    color: black;
+    color: palette(text);
 }
 
 QLineEdit:focus {
-    border: 1px solid #70a9ec;
+    border: 1px solid palette(accent);
+}
+
+QLineEdit#searchHotkeys {
+    min-height: 20px;
 }
 
 QLabel {
-    color: black;
+    color: palette(text);
     background-color: transparent;
 }
 
@@ -229,44 +209,41 @@ QDialogButtonBox QPushButton {
     border-radius: 4px;
 }
 
-QDialogButtonBox QPushButton[text="确认"], QDialogButtonBox QPushButton[text="保存"] {
+QDialogButtonBox QPushButton#btnOk, QDialogButtonBox QPushButton#btnSave {
     background-color: #1070e0;
     color: white;
     border: 1px solid #0e63c6;
 }
 
-QDialogButtonBox QPushButton[text="确认"]:hover, QDialogButtonBox QPushButton[text="保存"]:hover {
+QDialogButtonBox QPushButton#btnOk:hover, QDialogButtonBox QPushButton#btnSave:hover {
     background-color: #0f69d2;
     border: 1px solid #5899e5;
 }
 
-QDialogButtonBox QPushButton[text="确认"]:pressed, QDialogButtonBox QPushButton[text="保存"]:pressed {
+QDialogButtonBox QPushButton#btnOk:pressed, QDialogButtonBox QPushButton#btnSave:pressed {
     background-color: #0d58b0;
     border: 1px solid #5794dd;
 }
 
 QLabel#statusLabel {
     padding-top: 10px;
-    padding-left: 0px; 
+    padding-left: 0px;
     padding-right: 0px;
     padding-bottom: 10px;
     font-size: 14px;
 }
 
 InfoDialog QTextBrowser {
-    background-color: white;
-    border: 1px solid #cccccc;
+    color: palette(text);
+    background-color: palette(base);
+    border: 1px solid palette(mid);
     border-radius: 4px;
     padding: 10px;
 }
 
-AboutDialog QTextBrowser {
+QTextBrowser#aboutContent {
     background-color: transparent;
     border: none;
-}
-
-AboutDialog QLabel#aboutContent {
-    background-color: transparent;
 }
 
 AlertDialog QLabel {
@@ -274,7 +251,7 @@ AlertDialog QLabel {
     padding: 20px;
 }
 
-QPushButton#btnOk, QPushButton#btnConfirm {
+QPushButton#btnYes, InfoDialog QPushButton#btnOk, QPushButton#btnConfirm {
     background-color: #1070e0;
     color: white;
     border: 1px solid #0e63c6;
@@ -284,20 +261,20 @@ QPushButton#btnOk, QPushButton#btnConfirm {
     min-height: 28px;
 }
 
-QPushButton#btnOk:hover, QPushButton#btnConfirm:hover {
+QPushButton#btnYes:hover, InfoDialog QPushButton#btnOk:hover, QPushButton#btnConfirm:hover {
     background-color: #0f69d2;
     border: 1px solid #5899e5;
 }
 
-QPushButton#btnOk:pressed, QPushButton#btnConfirm:pressed {
+QPushButton#btnYes:pressed, InfoDialog QPushButton#btnOk:pressed, QPushButton#btnConfirm:pressed {
     background-color: #0d58b0;
     border: 1px solid #5794dd;
 }
 
 
 QPushButton#btnCancel, QPushButton#btnNo {
-    background-color: white;
-    border: 1px solid #cccccc;
+    background-color: palette(button);
+    border: 1px solid palette(mid);
     border-radius: 4px;
     padding: 5px 15px;
     min-width: 80px;
@@ -305,11 +282,11 @@ QPushButton#btnCancel, QPushButton#btnNo {
 }
 
 QPushButton#btnCancel:hover, QPushButton#btnNo:hover {
-    background-color: #f8f8f8;
-    border: 1px solid #70a9ec;
+    background-color: palette(light);
+    border: 1px solid palette(accent);
 }
 
 KeyInputDialog QLabel#promptLabel {
     font-size: 14px;
-    color: #398fe6;
+    color: palette(link);
 }

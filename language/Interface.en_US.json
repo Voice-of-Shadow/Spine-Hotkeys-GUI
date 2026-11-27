@@ -6,13 +6,22 @@
 	"groupHotkeyList": "Hotkeys List",
 
 	"labelCategory": "Category:",
+	"allCategories": "All categories",
+	"searchHotkeys": "Search all categories by name or shortcut",
+	"searchPlaceholder": "Search names or shortcuts",
+	"captureSearch": "Find by keypress",
+	"pressSearchShortcut": "Press the shortcut you want to find.",
+	"noSearchResults": "No matching names or shortcuts",
 	"labelLanguage": "Language:",
+	"btnUseDarkTheme": "Use Dark Theme",
+	"btnUseLightTheme": "Use Light Theme",
 	"statusLabel": "  Please select the action you want to set a shortcut for",
 	"statusConflict": "Conflict:",
 
 	"btnEditHotkey": "Edit Hotkeys",
 	"btnAddHotkey": "Add Hotkeys",
 	"btnDeleteHotkey": "Delete Hotkeys",
+	"btnUndoHotkey": "Undo edit",
 	"btnQuoteMode": "Character Mode",
 	"btnLink_link": "Link",
 	"btnLink_relink": "Relink",
@@ -47,7 +56,7 @@
 	"dialogTitle_keyMapping": "Key Mapping",
 	"dialogTitle_about": "About",
 
-	"userGuide": "● Link to the file path containing the Spine hotkey configuration file\n● Click the input field or the Edit button to enter hotkeys\n● After clicking Confirm, restart Spine or reload the hotkeys in the Editor Settings\n● Click Open Folder to access the linked path, back up the hotkey file, and perform other related operations\n● For advanced hotkey configurations beyond the core processing rules, please modify the hotkey file directly",
+	"userGuide": "● Link to the file path containing the Spine hotkey configuration file\n● Press Ctrl+F to search by name or shortcut. Clear the field to return to the previous category\n● Click the magnifying glass or press Ctrl+Shift+F, then press a shortcut to find its exact binding across all categories. Press Esc to cancel capture\n● Click the input field or the Edit button to enter hotkeys\n● Click Undo edit or press Ctrl+Z in the main window to undo one edit at a time. You can undo after saving, then save again to update the file\n● After clicking Confirm, restart Spine or reload the hotkeys in the Editor Settings\n● Click Open Folder to access the linked path, back up the hotkey file, and perform other related operations\n● For advanced hotkey configurations beyond the core processing rules, please modify the hotkey file directly",
 
 	"shortcutsGuide": "● In General Mode, hotkey combinations can use modifier keys such as \"Ctrl\", \"Shift\", and \"Alt\"\n● In Character Mode (Single-quote Mode), only the \"Alt\" modifier key can be used in hotkey combinations\n● When using Character Mode, hotkeys gain long-press functionality: after an initial trigger and a short delay, the action will repeat continuously\n● Character Mode accepts single typable characters ('a'、'ア'、'啊'、'↓'). Some characters have corresponding keywords\n● Special characters not present on a standard keyboard require key mapping in Single-quote Mode; please avoid entering unexpected or unsupported characters",
 

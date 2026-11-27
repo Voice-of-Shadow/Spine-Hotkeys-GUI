@@ -6,7 +6,10 @@
 
 import json
 import os
-from typing import Any, Dict, Optional, Tuple
+import sys
+from typing import Dict, Optional, Tuple
+
+from utils.resource_path import get_bundled_resource_path
 
 
 class I18nManager:
@@ -23,6 +26,23 @@ class I18nManager:
         self.current_language = ""
         self.interface_texts: Dict[str, str] = {}
         self.keydoc_texts: Dict[str, str] = {}
+
+    def _read_texts(self, filename: str) -> Optional[Dict[str, str]]:
+        directories = [self.language_dir]
+        if getattr(sys, 'frozen', False):
+            # 外部自定义翻译优先；升级后新加的键由内置语言包提供。
+            directories.insert(0, get_bundled_resource_path("language"))
+
+        texts = None
+        for directory in directories:
+            path = os.path.join(directory, filename)
+            if os.path.isfile(path):
+                with open(path, encoding="utf-8") as file:
+                    entries = json.load(file)
+                if texts is None:
+                    texts = {}
+                texts.update(entries)
+        return texts
     
     def load_language(self, language_code: str) -> bool:
         """
@@ -35,26 +55,14 @@ class I18nManager:
             加载是否成功
         """
         try:
-            interface_path = os.path.join(
-                self.language_dir, f"Interface.{language_code}.json"
-            )
-            if os.path.exists(interface_path):
-                with open(interface_path, 'r', encoding='utf-8') as f:
-                    self.interface_texts = json.load(f)
-            else:
-                print(f"界面语言包不存在: {interface_path}")
+            interface_file = f"Interface.{language_code}.json"
+            interface = self._read_texts(interface_file)
+            if interface is None:
+                print(f"界面语言包不存在: {interface_file}")
                 return False
-            
-            keydoc_path = os.path.join(
-                self.language_dir, f"KeyDoc.{language_code}.json"
-            )
-            if os.path.exists(keydoc_path):
-                with open(keydoc_path, 'r', encoding='utf-8') as f:
-                    self.keydoc_texts = json.load(f)
-            else:
-                print(f"快捷键文档语言包不存在: {keydoc_path}")
-                self.keydoc_texts = {}
-            
+
+            self.keydoc_texts = self._read_texts(f"KeyDoc.{language_code}.json") or {}
+            self.interface_texts = interface
             self.current_language = language_code
             return True
         except Exception as e:

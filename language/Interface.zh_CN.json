@@ -6,13 +6,22 @@
 	"groupHotkeyList": "快捷键列表",
 
 	"labelCategory": "类别：",
+	"allCategories": "所有类别",
+	"searchHotkeys": "在所有类别中搜索名称或快捷键",
+	"searchPlaceholder": "搜索名称或快捷键",
+	"captureSearch": "按键搜索",
+	"pressSearchShortcut": "请按下要查找的快捷键",
+	"noSearchResults": "没有匹配的名称或快捷键",
 	"labelLanguage": "语言：",
+	"btnUseDarkTheme": "切换为深色主题",
+	"btnUseLightTheme": "切换为浅色主题",
 	"statusLabel": "  请选择想设置快捷方式的操作",
 	"statusConflict": "存在冲突：",
 
 	"btnEditHotkey": "修改快捷键",
 	"btnAddHotkey": "添加快捷键",
 	"btnDeleteHotkey": "删除快捷键",
+	"btnUndoHotkey": "撤回上一步",
 	"btnQuoteMode": "单引号模式",
 	"btnLink_link": "链接",
 	"btnLink_relink": "重链接",
@@ -47,7 +56,7 @@
 	"dialogTitle_keyMapping": "关键字字符对应",
 	"dialogTitle_about": "程序信息",
 
-	"userGuide": "● 链接Spine快捷键文件所在的文件路径\n● 点击输入框或编辑按钮录入快捷键\n● 点击确认后重启Spine或在编辑器设置中重新加载快捷键\n● 点击打开文件夹可以打开链接路径、对快捷键文件进行备份等操作\n● 核心处理规则外的高级快捷键录入请直接修改快捷键文件",
+	"userGuide": "● 链接Spine快捷键文件所在的文件路径\n● 按 Ctrl+F 输入命令名或快捷键，清空搜索框可返回原类别\n● 点击放大镜或按 Ctrl+Shift+F，再按下要查找的快捷键，即可跨类别查找相同绑定。按 Esc 取消录入\n● 点击输入框或编辑按钮录入快捷键\n● 点击「撤回上一步」或在主窗口按 Ctrl+Z 可逐步撤回编辑。保存后仍可撤回，再次保存即可写入文件\n● 点击确认后重启Spine或在编辑器设置中重新加载快捷键\n● 点击打开文件夹可以打开链接路径、对快捷键文件进行备份等操作\n● 核心处理规则外的高级快捷键录入请直接修改快捷键文件",
 
 	"shortcutsGuide": "● 一般模式可以使用\"ctrl\"、\"shift\"、\"alt\"修饰键组合快捷键\n● 单引号模式(字符模式)仅可以使用\"alt\"修饰键组合快捷键\n● 使用单引号模式、快捷键将附加长按功能。在触发动作一段延迟后重复触发\n● 单引号模式可以录入单个可键入字符('a'、'ア'、'啊'、'↓')。部分字符有对应关键字\n● 单引号模式键盘外特殊字符的键入需要做键映射、请不要做超预期的录入",
 

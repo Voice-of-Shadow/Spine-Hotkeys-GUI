@@ -1,7 +1,20 @@
-# 项目特殊排除
-# 测试用例、程序产生的临时数据
-test case/
-processing/
+# 项目本地数据与构建产物
+/test case/
+/processing/
+/build/
+/dist/
+/Spine Hotkeys Editor.exe
+
+# 保存在项目根目录的 Spine 快捷键文件及转换中间文件
+/hotkeys.txt
+/hotkeys-*.txt
+/hotkeys.json
+/hotkeys_temp.json
+
+# 系统生成的文件
+Thumbs.db
+Desktop.ini
+.DS_Store
 
 
 # 下方为 Python 通用忽略规则
@@ -17,9 +30,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -40,6 +51,7 @@ MANIFEST
 #   before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+!/Spine_Hotkeys_Editor.spec
 
 # Installer logs
 pip-log.txt

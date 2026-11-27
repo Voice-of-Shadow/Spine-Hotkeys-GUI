@@ -1,8 +1,8 @@
 {
 	"metadata": {
-		"version": "v0.2.3",
-		"build_date": "2026.06.23",
-		"compatible_version": "4.3.17"
+		"version": "v0.3.0",
+		"build_date": "2026.11.26",
+		"compatible_version": "4.3.26"
 	},
 	"localization": {
 		"primary_language": "zh_CN",
@@ -23,6 +23,7 @@
 	},
 	"system": {
 		"initialized": false,
+		"theme": "light",
 		"last_loaded": "",
 		"link_path": ""
 	}

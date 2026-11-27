@@ -6,7 +6,13 @@
 
 import json
 import os
-from typing import Any, Dict, List, Optional, Tuple
+from contextlib import contextmanager
+from copy import deepcopy
+from typing import Any, Dict, Iterable, List, Optional, Tuple
+
+
+Command = Tuple[str, str]
+ShortcutRow = Tuple[str, str, int]
 
 
 class HotkeyManager:
@@ -17,6 +23,8 @@ class HotkeyManager:
         self.data: List[Dict[str, Any]] = []
         self.json_path: str = ""
         self._modified: bool = False
+        self._saved_data = []
+        self._undo_history: List[Tuple[ShortcutRow, Dict[Command, List[str]]]] = []
     
     def load_from_json(self, json_path: str) -> bool:
         """
@@ -31,16 +39,22 @@ class HotkeyManager:
         try:
             if os.path.exists(json_path):
                 with open(json_path, 'r', encoding='utf-8') as f:
-                    self.data = json.load(f)
+                    data = json.load(f)
+                for category in data:
+                    for item in category.get("items", []):
+                        if not item.get("shortcuts"):
+                            item["shortcuts"] = [""]
+                self.data = data
                 self.json_path = json_path
-                self._modified = False
+                self._undo_history.clear()
+                self.set_modified(False)
                 return True
             return False
         except Exception as e:
             print(f"加载快捷键数据失败: {e}")
             return False
     
-    def save_to_json(self, json_path: Optional[str] = None) -> bool:
+    def save_to_json(self, json_path: Optional[str] = None, *, mark_saved: bool = True) -> bool:
         """
         保存数据到 JSON 文件
         
@@ -58,7 +72,8 @@ class HotkeyManager:
             with open(path, 'w', encoding='utf-8') as f:
                 json.dump(self.data, f, indent=2, ensure_ascii=False)
             
-            self._modified = False
+            if mark_saved:
+                self.set_modified(False)
             return True
         except Exception as e:
             print(f"保存快捷键数据失败: {e}")
@@ -279,10 +294,41 @@ class HotkeyManager:
     def is_modified(self) -> bool:
         """判断数据是否被修改"""
         return self._modified
+
+    @contextmanager
+    def edit(self, row: ShortcutRow, conflicts: Iterable[Command] = ()):
+        """把本次操作涉及的所有命令（包括冲突项）记为一个撤回步骤。"""
+        commands = [(row[0], row[1]), *conflicts]
+        before = {key: self.get_item(*key)["shortcuts"][:] for key in commands}
+        try:
+            yield
+        except Exception:
+            for key, shortcuts in before.items():
+                self.get_item(*key)["shortcuts"] = shortcuts
+            raise
+        else:
+            if any(self.get_item(*key)["shortcuts"] != old for key, old in before.items()):
+                self._undo_history.append((row, before))
+        finally:
+            self._modified = self.data != self._saved_data
+
+    def can_undo(self) -> bool:
+        return bool(self._undo_history)
+
+    def undo(self) -> Optional[ShortcutRow]:
+        if not self._undo_history:
+            return None
+        row, before = self._undo_history.pop()
+        for key, shortcuts in before.items():
+            self.get_item(*key)["shortcuts"] = shortcuts
+        self._modified = self.data != self._saved_data
+        return row
     
     def set_modified(self, modified: bool = True) -> None:
         """设置修改标志"""
         self._modified = modified
+        if not modified:
+            self._saved_data = deepcopy(self.data)
     
     def get_json_path(self) -> str:
         """获取当前加载的 JSON 文件路径"""

@@ -6,8 +6,11 @@
 
 import json
 import os
+import sys
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
+
+from utils.resource_path import get_bundled_resource_path
 
 
 class ConfigManager:
@@ -33,12 +36,14 @@ class ConfigManager:
         """
         try:
             if os.path.exists(self.config_path):
-                with open(self.config_path, 'r', encoding='utf-8') as f:
+                with open(self.config_path, encoding="utf-8") as f:
                     self.config = json.load(f)
-                return True
+            elif getattr(sys, 'frozen', False):
+                with open(get_bundled_resource_path("config.json"), encoding="utf-8") as f:
+                    self.config = json.load(f)
             else:
                 self.config = self._get_default_config()
-                return True
+            return True
         except Exception as e:
             print(f"加载配置文件失败: {e}")
             self.config = self._get_default_config()
@@ -63,9 +68,9 @@ class ConfigManager:
         """获取默认配置"""
         return {
             "metadata": {
-                "version": "v0.1",
-                "build_date": "2026.02.01",
-                "compatible_version": "4.3.39-beta"
+                "version": "v4.3.26",
+                "build_date": "2026.11.26",
+                "compatible_version": "4.3.26"
             },
             "localization": {
                 "primary_language": "zh_CN",
@@ -75,6 +80,7 @@ class ConfigManager:
             },
             "system": {
                 "initialized": False,
+                "theme": "light",
                 "last_loaded": "",
                 "link_path": ""
             }
@@ -126,6 +132,14 @@ class ConfigManager:
     def get_initialized(self) -> bool:
         """获取初始化状态"""
         return self.config.get("system", {}).get("initialized", False)
+
+    def get_theme(self) -> str:
+        """旧配置默认使用浅色主题。"""
+        return "dark" if self.config.get("system", {}).get("theme") == "dark" else "light"
+
+    def set_theme(self, theme: str) -> None:
+        self.config.setdefault("system", {})["theme"] = theme
+        self.save_config()
     
     def set_initialized(self, status: bool) -> None:
         """设置初始化状态"""

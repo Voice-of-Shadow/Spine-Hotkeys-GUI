@@ -134,7 +134,7 @@ QT_KEY_TO_NAME = {
     # 方向键
     Qt.Key_Up: 'UP', Qt.Key_Down: 'DOWN', Qt.Key_Left: 'LEFT', Qt.Key_Right: 'RIGHT',
     # 其他功能键
-    Qt.Key_Escape: 'ESCAPE', Qt.Key_Tab: 'TAB', Qt.Key_Backspace: 'BACKSPACE',
+    Qt.Key_Escape: 'ESCAPE', Qt.Key_Tab: 'TAB', Qt.Key_Backtab: 'TAB', Qt.Key_Backspace: 'BACKSPACE',
     Qt.Key_Return: 'ENTER', Qt.Key_Enter: 'NUMPAD_ENTER',
     Qt.Key_Insert: 'INSERT', Qt.Key_Delete: 'DELETE',
     Qt.Key_Home: 'HOME', Qt.Key_End: 'END',
